@@ -97,19 +97,17 @@ public class connector : MonoBehaviour
                             nodeDataController.connectedCableIds.Add(iCableDataController.cableId);
 
                             // 終了処理的な？
-                            isCableInstantiated = false;
-                            iCable = null;
-                            nodeDataController = null;
-                            iCableDataController = null;
-                            isConnected = false;
+                            finish_process();
 
                         } else {
                             Debug.Log("nodeId error");
                             Destroy(iCable.gameObject);
+                            finish_process();
                         }
                     } else {
                         Debug.Log("isCableInstantiated is false");
                         Destroy(iCable.gameObject);
+                        finish_process();
                     }
 
                 }
@@ -117,7 +115,15 @@ public class connector : MonoBehaviour
         }
     }
 
-    Vector3 yOffset(Vector3 vec, float offset) {
+    private Vector3 yOffset(Vector3 vec, float offset) {
         return new Vector3(vec.x, offset, vec.z);
+    }
+
+    private void finish_process() {
+        isCableInstantiated = false;
+        iCable = null;
+        nodeDataController = null;
+        iCableDataController = null;
+        isConnected = false;
     }
 }
